@@ -1,5 +1,32 @@
-.superstyle {
+/* .superstyle {
     color:grey; 
     border: 1px solid red;
 
-} 
+}  */
+.center {
+    text-align: center;
+
+}
+
+#paragraph2 {
+
+    font-family: Arial;
+    text-decoration: line-through ;
+    text-align: center;
+}
+
+ #yes {
+
+ }
+
+ #no {
+    margin-left: 15px;
+ }
+
+ .yesno {
+    text-align: center;
+ }
+
+ .superdiv {
+    border: 3px solid orange ;
+ }
