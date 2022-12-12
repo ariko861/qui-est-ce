@@ -3,20 +3,37 @@
 
 <head>
 
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
-    
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="script.js"></script>
+
+
 </head>
 
 <body>
 
-    <div class="superdiv">
-    <h6 class="center">Question 1</h6>
+    <div class="superdiv" x-data="captain">
 
-    <p class="center superstyle">Est-ce que cette personne est un garçon ?</p>
+        <template x-if="personnesRestantes">
+            <div>
+                <h6 class="center">Question <span x-text="count + 1"></span></h6>
 
-    <p class="yesno"><span id="yes">Yes</span><span id="no">No</span></p>
-    <a href="page1.html"><button>Aller</button></a>
-</div>
+                <p class="center superstyle" x-text="questions[count]"></p>
+
+                <p class="yesno">
+                    <span id="yes" x-on:click="answer(true)">Yes</span>
+                    <span id="no" x-on:click="answer(false)">No</span>
+                </p>
+                <a href="page1.html"><button>Aller</button></a>
+            </div>
+        </template>
+        <template x-if="!personnesRestantes">
+            <div>
+                <h6>Gagnééé !!</h6>
+                <p>La personne est <span x-text="personnes[0].prenom"></span> <span x-text="personnes[0].nom"></span></p>
+            </div>
+        </template>
+    </div>
 
 </body>
 
