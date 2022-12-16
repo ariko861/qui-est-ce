@@ -7,7 +7,6 @@ document.addEventListener('alpine:init', () => {
             "Est-ce que cette personne est un garçon ?",
             "Est-ce que cette personne a les cheveux blonds ?"
         ],
-        message: "Est-ce que cette personne est un garçon ?",
         personnes: [
             {
                 nom: 'Peletier',
@@ -29,21 +28,18 @@ document.addEventListener('alpine:init', () => {
         count: 0,
         personnesRestantes: true,
 
-        checkIfLeft() {
+        checkIfLeft() { // vérifie si il reste plus d'une personne dans la liste
             if ( this.personnes.length == 1 ) {
-                this.personnesRestantes = false;
-                // console.log(this.personnes);
-
+                this.personnesRestantes = false; // si il ne reste plus qu'une personne mettre personnesRestantes à false
+            } else {
+                this.count++; // Sinon passer à la question suivante
             }
         },
         answer(bool) {
-            this.personnes = this.personnes.filter(function(personne) {
-                // console.log(this.count);
+            this.personnes = this.personnes.filter(function(personne) { // filtre les personnes selon la réponse donnée
                 return personne.attributes[this.count] == bool;
             }, this);
-            this.count++;
-            this.checkIfLeft();
-            // console.log(this.personnes);
+            this.checkIfLeft(); // vérifier le nombre de personnes restantes
         },
     }))
 })

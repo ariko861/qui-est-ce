@@ -27,12 +27,13 @@
                 <a href="page1.html"><button>Aller</button></a>
             </div>
         </template>
-        <template x-if="!personnesRestantes">
-            <div>
+
+        <!-- <template x-if="!personnesRestantes"> -->
+            <div x-show="!personnesRestantes">
                 <h6>Gagnééé !!</h6>
                 <p>La personne est <span x-text="personnes[0].prenom"></span> <span x-text="personnes[0].nom"></span></p>
             </div>
-        </template>
+        <!-- </template> -->
     </div>
 
 </body>
