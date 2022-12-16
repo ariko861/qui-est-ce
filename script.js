@@ -3,29 +3,10 @@
 document.addEventListener('alpine:init', () => {
     Alpine.data('captain', () => ({
 
-        questions: [
-            "Est-ce que cette personne est un garçon ?",
-            "Est-ce que cette personne a les cheveux blonds ?"
-        ],
-        personnes: [
-            {
-                nom: 'Peletier',
-                prenom:'Alois',
-                attributes: [true, true],
-            },
-            {
-                nom: 'Spilotti',
-                prenom: 'Arnaud',
-                attributes: [true, false],
-            },
-            {
-                nom: 'Girboux',
-                prenom:'Léa',
-                attributes: [false, true],
-            },
-            
-        ],
+        questions: [],
+        personnes: [],
         count: 0,
+        questionFirstColumn: 2,
         personnesRestantes: true,
 
         checkIfLeft() { // vérifie si il reste plus d'une personne dans la liste
@@ -35,11 +16,33 @@ document.addEventListener('alpine:init', () => {
                 this.count++; // Sinon passer à la question suivante
             }
         },
+
         answer(bool) {
-            this.personnes = this.personnes.filter(function(personne) { // filtre les personnes selon la réponse donnée
-                return personne.attributes[this.count] == bool;
+            this.personnes = this.personnes.filter(function(personne) { // filtre les personnes selon la réponse donnée 
+                return personne[this.questions[this.count]] == bool;
             }, this);
             this.checkIfLeft(); // vérifier le nombre de personnes restantes
         },
+
+        async readFile(files){ // Lit le fichier excel une fois déposé
+            file = files[0]; // sélectionne le premier fichier
+            const data = await file.arrayBuffer(); // converti en buffer
+            
+            var workbook = XLSX.read(data, { // lit le buffer avec un lecteur xlsx
+                type: 'binary'
+            });
+            var rows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[workbook.SheetNames[0]]); // converti les lignes du excel en objets
+            
+            var keys = Object.keys(rows[0]); // récupère les clés 
+            for ( let i = this.questionFirstColumn; i < keys.length ; i++ ){ // assigne les clés aux questions à poser, commence par la colonne définie dans questionFirstColumn
+                this.questions.push(keys[i]);
+            }
+          
+            rows.forEach(element => { // ajoute chaque ligne à la liste de personnes
+                this.personnes.push(element);
+            });
+        },
+
+
     }))
 })
