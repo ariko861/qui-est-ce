@@ -3,20 +3,50 @@
 
 <head>
 
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
-    
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+
+
 </head>
 
 <body>
 
-    <div class="superdiv">
-    <h6 class="center">Question 1</h6>
+    <div class="superdiv" x-data="captain">
 
-    <p class="center superstyle">Est-ce que cette personne est un garçon ?</p>
+        <template x-if="!personnes || personnes.length == 0">
 
-    <p class="yesno"><span id="yes">Yes</span><span id="no">No</span></p>
-    <a href="page1.html"><button>Aller</button></a>
-</div>
+            <input type="file" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" @change="readFile($event.target.files)"/>
+
+            <p x-text="personnes"></p>
+        </template>
+
+
+        <template x-if="personnes && personnes.length >= 1">
+            <div>
+                <div x-show="personnesRestantes">
+                    <h6 class="center">Question <span x-text="count + 1"></span></h6>
+
+                    <p class="center superstyle">
+                        Est-ce que la personne <span x-text="questions[count]"></span> ?
+                    </p>
+
+                    <p class="yesno">
+                        <span id="yes" x-on:click="answer('1')">Yes</span>
+                        <span id="no" x-on:click="answer('0')">No</span>
+                    </p>
+                </div>
+
+                <div x-show="!personnesRestantes" x-transition>
+                    <h6>J'ai gagnééé !!!</h6>
+                    <p>La personne est <span x-text="personnes[0].prenom"></span> <span
+                            x-text="personnes[0].nom"></span>
+                    </p>
+                </div>
+            </div>
+        </template>
+    </div>
 
 </body>
 
