@@ -17,9 +17,10 @@
 
         <template x-if="!personnes || personnes.length == 0">
 
-            <input type="file" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" @change="readFile($event.target.files)"/>
-
-            <p x-text="personnes"></p>
+            <div>
+              <input type="file" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.oasis.opendocument.spreadsheet" @change="readFile($event.target.files)"/>
+             <p><button class="blabla">Utiliser le fichier par défaut</button></p>
+             </div>
         </template>
 
 
