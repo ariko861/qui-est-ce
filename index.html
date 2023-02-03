@@ -2,7 +2,7 @@
 <html>
 
 <head>
-
+    <meta charset="UTF-8"> 
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -16,9 +16,11 @@
     <div class="superdiv" x-data="captain">
 
         <template x-if="!personnes || personnes.length == 0">
-
-            <input type="file" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" @change="readFile($event.target.files)"/>
-
+            <div>
+            <input type="file" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" @change="getFile($event.target.files)"/>
+            <br>
+            <button @click="fetchFile('exemple-liste-personnes.xlsx')">Charger le fichier excel par défaut</button>
+        </div>
             <p x-text="personnes"></p>
         </template>
 
