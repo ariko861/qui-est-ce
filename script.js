@@ -6,7 +6,7 @@ document.addEventListener('alpine:init', () => {
         questions: [],
         personnes: [],
         count: 0,
-        questionFirstColumn: 1,
+        questionFirstColumn: 2,
         personnesRestantes: true,
 
         checkIfLeft() { // vérifie si il reste plus d'une personne dans la liste
@@ -24,13 +24,25 @@ document.addEventListener('alpine:init', () => {
             this.checkIfLeft(); // vérifier le nombre de personnes restantes
         },
 
-        async readFile(files){ // Lit le fichier excel une fois déposé
+        async getFile(files){
             file = files[0]; // sélectionne le premier fichier
             const data = await file.arrayBuffer(); // converti en buffer
-            
             var workbook = XLSX.read(data, { // lit le buffer avec un lecteur xlsx
                 type: 'binary'
             });
+            var workbook = XLSX.read(data);
+            this.readWorkbook(workbook);
+        },
+
+        async fetchFile(url){
+            let response = await (await fetch(url)).arrayBuffer();
+            var workbook = XLSX.read(response);
+            this.readWorkbook(workbook);
+        },
+
+        readWorkbook(workbook){ // Lit le fichier excel une fois déposé
+            
+            
             var rows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[workbook.SheetNames[0]]); // converti les lignes du excel en objets
             
             var keys = Object.keys(rows[0]); // récupère les clés 
