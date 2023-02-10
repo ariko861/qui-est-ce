@@ -29,7 +29,29 @@
 
  .superdiv {
     border: 3px solid orange ;
+    text-align: center;
  }
  .blabla {
     background-color: red ;
+ }
+
+ .selectfile {
+   width: 20em; 
+   height: 5em;
+   border-color: rgb(243, 104, 11);
+   border: 3px solid;
+   border-radius: 15%;
+ }
+
+ .selectfile:hover{
+   background-color: rgb(228, 95, 7);
+ }
+
+ p {
+ font-family: font-family: 'Almarai', sans-serif;  
+ }
+
+ h4 {
+   text-align: center;
+
  }
