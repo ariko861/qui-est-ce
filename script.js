@@ -6,8 +6,9 @@ document.addEventListener('alpine:init', () => {
         questions: [],
         personnes: [],
         count: 0,
-        questionFirstColumn: 2,
+        questionFirstColumn: 1,
         personnesRestantes: true,
+        options: [],
 
         checkIfLeft() { // vérifie si il reste plus d'une personne dans la liste
             if ( this.personnes.length == 1 ) {
@@ -18,10 +19,27 @@ document.addEventListener('alpine:init', () => {
         },
 
         answer(bool) {
+            console.log(bool);
             this.personnes = this.personnes.filter(function(personne) { // filtre les personnes selon la réponse donnée 
                 return personne[this.questions[this.count]] == bool;
             }, this);
             this.checkIfLeft(); // vérifier le nombre de personnes restantes
+            if ( this.personnesRestantes ) {
+                this.checkAvailableOptions(); // vérifier les options disponibles pour la question
+            }
+        },
+
+        checkAvailableOptions(){
+            this.options = []
+            this.personnes.forEach(personne => {
+                let option = personne[this.questions[this.count]];
+                if ( this.options.indexOf(option) == -1 ) {
+                    this.options.push(option);
+                }
+            }, this);
+            if ( this.options.length < 2 ) {
+                this.answer(this.options[0]);
+            }
         },
 
         async getFile(files){
@@ -53,6 +71,7 @@ document.addEventListener('alpine:init', () => {
             rows.forEach(element => { // ajoute chaque ligne à la liste de personnes
                 this.personnes.push(element);
             });
+            this.checkAvailableOptions();
         },
 
 

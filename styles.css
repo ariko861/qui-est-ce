@@ -16,11 +16,13 @@
 }
 
  #yes {
-
+   color: rgb(43, 255, 0);
+   
  }
 
  #no {
     margin-left: 15px;
+    color: red;
  }
 
  .yesno {
@@ -30,6 +32,7 @@
  .superdiv {
     border: 3px solid orange ;
     text-align: center;
+    padding: 15px;
  }
  .blabla {
     background-color: red ;
@@ -41,6 +44,7 @@
    border-color: rgb(243, 104, 11);
    border: 3px solid;
    border-radius: 15%;
+   margin-bottom: 20px;
  }
 
  .selectfile:hover{
@@ -48,10 +52,20 @@
  }
 
  p {
- font-family: font-family: 'Almarai', sans-serif;  
+   font-family: font-family: 'Almarai', sans-serif;  
  }
 
  h4 {
    text-align: center;
 
+ }
+ .answerbutton {
+  margin: 2em;
+  cursor: pointer;
+  width: 5em;
+  height: 2em;
+ }
+
+ .bonton:hover {
+   opacity: 0.5;
  }
