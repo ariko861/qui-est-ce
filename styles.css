@@ -69,3 +69,12 @@
  .bonton:hover {
    opacity: 0.5;
  }
+
+.image img {
+  max-width: 100%;
+}
+.image {
+  display: inline-block;
+  margin: 2em;
+  width: 5em;
+}
