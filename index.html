@@ -2,13 +2,13 @@
 <html>
 
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"
+        integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>
-    <link rel="preconnect » href="https://fonts.googleapis.com"> <link rel="preconnect » href="https://fonts.gstatic.com » crossorigin>
-    <link href="https://fonts.googleapis.com/css2? family=Almarai&display=swap » rel="stylesheet">
 
 </head>
 
@@ -16,12 +16,18 @@
 
     <div class="superdiv" x-data="captain">
 
+        <div class="titre">
+            <h1>Qui-est-ce ?</h1>
+            <p>Projet de Aloïs Peltier</p>
+        </div>
         <template x-if="!personnes || personnes.length == 0">
             <div>
-            <input class="selectfile" type="file" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.oasis.opendocument.spreadsheet" @change="getFile($event.target.files)"/>
-            <br>
-            <button @click="fetchFile('captain-main.ods')">Charger le fichier excel par défaut</button>
-        </div>
+                <input class="selectfile" type="file"
+                    accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.oasis.opendocument.spreadsheet"
+                    @change="getFile($event.target.files)" />
+                <br>
+                <button @click="fetchFile('captain-images.ods')" class="launchgame">Commencer le jeu par défaut</button>
+            </div>
             <p x-text="personnes"></p>
         </template>
 
@@ -29,7 +35,7 @@
         <template x-if="personnes && personnes.length >= 1">
             <div>
                 <div x-show="personnesRestantes">
-                    <h6 class="center">Question <span x-text="count + 1"></span></h6>
+                    <h3 class="center">Question <span x-text="count + 1"></span></h3>
 
                     <p class="center superstyle">
                         <span x-text="questions[count]"></span>
@@ -38,7 +44,8 @@
                     <p class="yesno">
                         <template x-if="options && options.length > 0">
                             <template x-for="option in options">
-                                <button class="bonton answerbutton" x-on:click="answer(option)" x-text="option"></button>
+                                <button class="bonton answerbutton" x-on:click="answer(option)"
+                                    x-text="option"></button>
                             </template>
                         </template>
                         <!--<span id="yes" x-on:click="answer('1')" class="bonton">Yes</span>
@@ -47,17 +54,19 @@
                 </div>
 
                 <div x-show="!personnesRestantes" x-transition.duration.500ms>
-                    <h4> Gagné !!!</h6>
+                    <h4> Gagné !!!</h4>
                     <p>La personne est <span x-text="personnes[0].prenom"></span> <span
                             x-text="personnes[0].nom"></span>
                     </p>
+                    <p><button class="launchgame" x-on:click="restartGame()">Recommencer le jeu</button></p>
                 </div>
 
                 <div>
                     <template x-if="images">
                         <template x-for="image in images">
-                            <div x-show="image.show" class="image" x-transition.duration.500ms>
-                                <img :src="image.url"/>
+                            <div x-show="image.show" class="image" x-transition:leave="falling"
+                                x-transition:leave-start="startfall" x-transition:leave-end="endfall">
+                                <img :src="image.url" />
                             </div>
                         </template>
                     </template>
@@ -65,7 +74,7 @@
 
             </div>
 
-            
+
         </template>
     </div>
 

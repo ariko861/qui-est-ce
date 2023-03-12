@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* .superstyle {
     color:grey; 
     border: 1px solid red;
@@ -8,6 +11,10 @@
 
 }
 
+.titre {
+  border: solid 1px orange;
+  margin: 5em;
+}
 #paragraph2 {
 
     font-family: Arial;
@@ -39,20 +46,46 @@
  }
 
  .selectfile {
-   width: 20em; 
-   height: 5em;
-   border-color: rgb(243, 104, 11);
-   border: 3px solid;
-   border-radius: 15%;
+   width: 80%; 
+   height: 10em;
+   text-align: center;
+   border: 3px dashed orange;
    margin-bottom: 20px;
  }
 
  .selectfile:hover{
-   background-color: rgb(228, 95, 7);
+   background-color: rgb(255, 212, 183);
+   cursor: pointer;
+ }
+
+ .launchgame {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 10px 16px;
+font-size: 18px;
+line-height: 1.3333333;
+border-radius: 6px;
  }
 
  p {
-   font-family: font-family: 'Almarai', sans-serif;  
+   font-family: 'Almarai', sans-serif;  
  }
 
  h4 {
@@ -77,4 +110,17 @@
   display: inline-block;
   margin: 2em;
   width: 5em;
+}
+.falling {
+  transition: ease-in;
+  transition-duration: 700ms;
+}
+.startfall {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.endfall {
+  opacity: 0;
+  transform: translateY(700px);
 }

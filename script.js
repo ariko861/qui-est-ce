@@ -22,6 +22,16 @@ document.addEventListener('alpine:init', () => {
             });
         },
 
+        restartGame(){
+            this.questions = [];
+            this.personnes = [];
+            this.count = 0;
+            this.personnesRestantes = true;
+            this.options = [];
+            this.images = [];
+
+        },
+
         checkImages(){
             this.images.forEach(image => {
                 let correspondant = this.personnes.find(personne => personne.prenom == image.prenom);
