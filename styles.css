@@ -110,7 +110,12 @@ border-radius: 6px;
   display: inline-block;
   margin: 2em;
   width: 5em;
+  transition: all 500ms
 }
+.image:hover {
+  width: 15em;
+}
+
 .falling {
   transition: ease-in;
   transition-duration: 700ms;
